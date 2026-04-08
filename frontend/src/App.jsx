@@ -4,7 +4,7 @@
 
   // Pages
   import Home from './pages/Homepage';
-  import Studyindia from './pages/studyindia';
+  import Studyindia from './pages/Studyindia';
   import Studyabroad from './pages/Studyabroad';
   import StudyUK from './studyabroad/StudyAbroadDetails.jsx';
   import AboutUs from './pages/AboutUs';
