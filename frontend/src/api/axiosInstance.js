@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Axios instance for API calls
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5003/api", // Backend API URL
-  // baseURL: "https://api.drankushgarg.com/api", // Production URL
+  // baseURL: "http://localhost:5003/api", // Backend API URL
+  baseURL: "https://api.eduorbix.com/api", // Production URL
   headers: {
     "Content-Type": "application/json",
   },
