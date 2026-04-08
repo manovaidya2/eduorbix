@@ -71,5 +71,5 @@ app.use('/api/agents', agentRoutes); // Add this line
     res.status(500).json({ error: err.message });
   });
 
-  const PORT = process.env.PORT || 5003;
+  const PORT = process.env.PORT || 5004;
   app.listen(PORT, () => console.log(`🚀 Backend running on http://localhost:${PORT}`));
