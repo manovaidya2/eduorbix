@@ -227,32 +227,47 @@ export default function AboutUs() {
         </div> */}
 
         {/* Our Network */}
-        <div className="bg-gray-50 rounded-3xl p-8 md:p-10 mb-20">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-[#0A1F44] mb-3">Our Global Network</h2>
-            <div className="w-20 h-1 bg-[#C9A227] mx-auto mb-4"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Connecting students to opportunities across the world
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {networkLocations.map((location, index) => (
-              <div key={index} className="flex items-center gap-3 bg-white rounded-xl p-3 shadow-sm hover:shadow-md transition-all">
-                <div className="w-8 h-8 bg-[#C9A227]/10 rounded-lg flex items-center justify-center">
-                  <MapPin className="w-4 h-4 text-[#C9A227]" />
-                </div>
-                <span className="text-gray-700 font-medium">{location}</span>
-              </div>
-            ))}
-          </div>
-          
-          <div className="bg-gradient-to-r from-[#0A1F44] to-[#1F3A6E] rounded-xl p-6 text-center">
-            <p className="text-white">
-              <span className="font-bold text-[#C9A227]">Plus:</span> Global partner network across 15+ countries with 100+ university collaborations
-            </p>
-          </div>
+<div className="bg-gray-50 rounded-2xl md:rounded-3xl p-5 sm:p-6 md:p-10 mb-14 md:mb-20">
+
+  {/* Heading */}
+  <div className="text-center mb-8 md:mb-10">
+    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A1F44] mb-2 md:mb-3">
+      Our Global Network
+    </h2>
+
+    <div className="w-16 md:w-20 h-1 bg-[#C9A227] mx-auto mb-3 md:mb-4"></div>
+
+    <p className="text-gray-600 text-sm sm:text-base max-w-xl md:max-w-2xl mx-auto">
+      Connecting students to opportunities across the world
+    </p>
+  </div>
+
+  {/* Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+    {networkLocations.map((location, index) => (
+      <div
+        key={index}
+        className="flex items-center gap-3 bg-white rounded-lg md:rounded-xl p-3 md:p-3.5 shadow-sm hover:shadow-md transition-all"
+      >
+        <div className="w-7 h-7 md:w-8 md:h-8 bg-[#C9A227]/10 rounded-md md:rounded-lg flex items-center justify-center shrink-0">
+          <MapPin className="w-4 h-4 text-[#C9A227]" />
         </div>
+
+        <span className="text-gray-700 text-sm md:text-base font-medium truncate">
+          {location}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  {/* Bottom Card */}
+  <div className="bg-gradient-to-r from-[#0A1F44] to-[#1F3A6E] rounded-lg md:rounded-xl p-4 sm:p-5 md:p-6 text-center">
+    <p className="text-white text-sm sm:text-base leading-relaxed">
+      <span className="font-bold text-[#C9A227]">Plus:</span>{" "}
+      Global partner network across 15+ countries with 100+ university collaborations
+    </p>
+  </div>
+</div>
 
         {/* Certifications & Accreditations */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
