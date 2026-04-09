@@ -43,24 +43,24 @@ export default function Header() {
     fetchStudyAbroadCountries();
   }, []);
 
-  const fetchStudyIndiaPrograms = async () => {
-    try {
-      const response = await axiosInstance.get("/study-india-programs");
-      if (response.data.success) {
-        const programs = response.data.data;
-        setStudyIndiaPrograms(programs);
-        
-        // Categorize programs
-        const categorized = {};
-        programHeadings.forEach(heading => {
-          categorized[heading] = programs.filter(program => program.category === heading);
-        });
-        setCategorizedPrograms(categorized);
-      }
-    } catch (error) {
-      console.error("Error fetching study india programs:", error);
+const fetchStudyIndiaPrograms = async () => {
+  try {
+    const response = await axiosInstance.get("/study-india-programs");
+    if (response.data.success) {
+      const programs = response.data.data;
+      setStudyIndiaPrograms(programs);
+      
+      // Categorize programs
+      const categorized = {};
+      programHeadings.forEach(heading => {
+        categorized[heading] = programs.filter(program => program.category === heading);
+      });
+      setCategorizedPrograms(categorized);
     }
-  };
+  } catch (error) {
+    console.error("Error fetching study india programs:", error);
+  }
+};
 
   const fetchStudyAbroadCountries = async () => {
     try {

@@ -120,7 +120,7 @@ export const createProgram = async (req, res) => {
 // @access  Public
 export const getAllPrograms = async (req, res) => {
   try {
-    const { category, isActive, search, page = 1, limit = 10 } = req.query;
+    const { category, isActive, search } = req.query;
     
     let query = {};
     
@@ -138,27 +138,14 @@ export const getAllPrograms = async (req, res) => {
       query.$text = { $search: search };
     }
     
-    // Pagination
-    const pageNum = parseInt(page);
-    const limitNum = parseInt(limit);
-    const skip = (pageNum - 1) * limitNum;
-    
+    // Fetch ALL programs without any limit
     const programs = await StudyIndiaProgram.find(query)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limitNum);
-    
-    const total = await StudyIndiaProgram.countDocuments(query);
+      .sort({ createdAt: -1 });
     
     res.status(200).json({
       success: true,
       data: programs,
-      pagination: {
-        currentPage: pageNum,
-        totalPages: Math.ceil(total / limitNum),
-        totalItems: total,
-        itemsPerPage: limitNum
-      }
+      total: programs.length
     });
     
   } catch (error) {
