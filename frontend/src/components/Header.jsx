@@ -234,28 +234,18 @@ export default function Header() {
                               </Link>
                               {programsInCategory.length > 0 ? (
                                 <ul className="space-y-2">
-                                  {programsInCategory.slice(0, 5).map((program) => (
+                                  {/* Display ALL programs - removed the slice limit */}
+                                  {programsInCategory.map((program) => (
                                     <li key={program._id}>
                                       <Link
                                         to={`/program/${program._id}`}
                                         onClick={() => setIsProgramsHorizonOpen(false)}
-                                        className="text-sm text-gray-600 hover:text-yellow-600 hover:pl-2 transition-all duration-200 block"
+                                        className="text-[12px] text-gray-600 hover:text-yellow-600 hover:pl-2 transition-all duration-200 block"
                                       >
                                         {program.title.length > 40 ? program.title.slice(0, 40) + "..." : program.title}
                                       </Link>
                                     </li>
                                   ))}
-                                  {programsInCategory.length > 5 && (
-                                    <li>
-                                      <Link
-                                        to={`/programs/category/${encodeURIComponent(heading)}`}
-                                        onClick={() => setIsProgramsHorizonOpen(false)}
-                                        className="text-xs text-yellow-600 hover:text-yellow-700 font-medium"
-                                      >
-                                        + {programsInCategory.length - 5} more...
-                                      </Link>
-                                    </li>
-                                  )}
                                 </ul>
                               ) : (
                                 <p className="text-sm text-gray-400 italic">No programs yet</p>
@@ -380,12 +370,13 @@ export default function Header() {
                           />
                         </button>
                         
-                        {/* Programs list for this category (visible when dropdown is open) */}
+                        {/* Programs list for this category (visible when dropdown is open) - Display ALL programs */}
                         {mobileOpenCategories[heading] && (
                           <div className="pl-4 space-y-1 pb-2 overflow-hidden animate-slideDown">
                             {programsInCategory.length > 0 ? (
                               <>
-                                {programsInCategory.slice(0, 5).map((program) => (
+                                {/* Display ALL programs - removed the slice limit */}
+                                {programsInCategory.map((program) => (
                                   <Link 
                                     key={program._id}
                                     to={`/program/${program._id}`} 
@@ -395,15 +386,6 @@ export default function Header() {
                                     • {program.title.length > 35 ? program.title.slice(0, 35) + "..." : program.title}
                                   </Link>
                                 ))}
-                                {programsInCategory.length > 5 && (
-                                  <Link 
-                                    to={`/programs/category/${encodeURIComponent(heading)}`}
-                                    onClick={() => setIsOpen(false)}
-                                    className="block text-yellow-400/70 text-xs hover:text-yellow-300 mt-1 px-3 py-1"
-                                  >
-                                    + {programsInCategory.length - 5} more programs...
-                                  </Link>
-                                )}
                               </>
                             ) : (
                               <p className="text-xs text-white/40 px-3 py-2 italic">No programs available</p>
@@ -441,7 +423,8 @@ export default function Header() {
                     📚 View All Programs
                   </Link>
                   {studyIndiaPrograms.length > 0 ? (
-                    studyIndiaPrograms.slice(0, 5).map((program) => (
+                    // Display ALL study india programs - removed the slice limit
+                    studyIndiaPrograms.map((program) => (
                       <Link key={program._id} to={`/program/${program._id}`} onClick={() => { setIsOpen(false); setIsMobileStudyIndiaOpen(false); }} className="block text-sm bg-white/10 rounded-lg text-white/70 hover:text-yellow-400 py-2 transition-colors px-3">
                         {program.title.length > 35 ? program.title.slice(0, 35) + "..." : program.title}
                       </Link>
@@ -465,7 +448,8 @@ export default function Header() {
               {isMobileStudyAbroadOpen && (
                 <div className="mt-3 ml-8 space-y-2 pl-4 overflow-hidden animate-slideDown">
                   {studyAbroadCountries.length > 0 ? (
-                    studyAbroadCountries.slice(0, 6).map((country) => (
+                    // Display ALL study abroad countries - removed the slice limit
+                    studyAbroadCountries.map((country) => (
                       <Link key={country._id} to={`/study/${country.country.toLowerCase()}`} onClick={() => { setIsOpen(false); setIsMobileStudyAbroadOpen(false); }} className="flex items-center gap-2 text-sm bg-white/10 rounded-lg mb-2 text-white/70 hover:text-yellow-400 px-3 py-2 transition-colors">
                         <span className="text-base">{country.flag || "🌍"}</span>
                         <span>{country.country}</span>
