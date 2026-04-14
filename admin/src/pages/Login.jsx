@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, LogIn, Sparkles, User } from "lucide-react";
 
 const users = [
-  { username: "manovaidya", password: "manovaidya@123" },
+  { username: "eduorbix", password: "eduorbix@123" },
   { email: "abhi@123", password: "123" },
   { email: "teacher@example.com", password: "123456" },
   { email: "admin@example.com", password: "123456" },

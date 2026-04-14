@@ -14,6 +14,7 @@ import applicationRoutes from './routes/applicationRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import partnerRoutes from './routes/partnerRoutes.js';
 import agentRoutes from './routes/agentRoutes.js'; // Add this line  
+import associatesRoutes from "./routes/associatesRoutes.js";
 
 
 
@@ -54,6 +55,7 @@ app.use('/api', applicationRoutes);
 app.use('/api', contactRoutes);
 app.use('/api/partners', partnerRoutes);
 app.use('/api/agents', agentRoutes); // Add this line
+app.use("/api", associatesRoutes);
 
 
 
@@ -71,5 +73,5 @@ app.use('/api/agents', agentRoutes); // Add this line
     res.status(500).json({ error: err.message });
   });
 
-  const PORT = process.env.PORT || 5004;
+  const PORT = process.env.PORT || 5003;
   app.listen(PORT, () => console.log(`🚀 Backend running on http://localhost:${PORT}`));

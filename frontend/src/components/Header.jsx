@@ -284,6 +284,7 @@ const fetchStudyIndiaPrograms = async () => {
             </div>
 
             <Link to="/services" className="hover:text-yellow-400">Services</Link>
+            <Link to="/associates" className="hover:text-yellow-400">Associate</Link>
             <Link to="/scholarships" className="hover:text-yellow-400">Scholarships</Link>
             <Link to="/blogs" className="hover:text-yellow-400">Blog</Link>
             <Link to="/contact" className="hover:text-yellow-400">Contact</Link>

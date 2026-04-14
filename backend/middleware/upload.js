@@ -3,13 +3,31 @@ import path from "path";
 import fs from "fs";
 
 const uploadDir = "./uploads";
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
+    const ext = path.extname(file.originalname);
+
+    let prefix = "file";
+
+    if (file.fieldname === "logo") {
+      prefix = "logo";
+    } else if (file.fieldname === "documents") {
+      prefix = "doc";
+    }
+
+    const uniqueName =
+      prefix + "-" + Date.now() + "-" + Math.round(Math.random() * 1e9) + ext;
+
+    cb(null, uniqueName);
   },
 });
 

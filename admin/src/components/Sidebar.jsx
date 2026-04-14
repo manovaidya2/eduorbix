@@ -113,6 +113,7 @@ const Sidebar = () => {
               { to: "/admin-applications", icon: FaWpforms, label: "Applications", color: "from-[#FFD700] to-[#FFA500]" },
               { to: "/agent-dashboard", icon: FaUserGraduate, label: "Agent Dashboard", color: "from-[#FFD700] to-[#FFA500]" },
               { to: "/partner-dashboard", icon: FaHandHoldingHeart, label: "Partner Dashboard", color: "from-[#FFD700] to-[#FFA500]" },
+              { to: "/admin-associates-dashboard", icon: FaUsers, label: "Add Associate", color: "from-[#FFD700] to-[#FFA500]" },
             ].map((item, index) => (
               <li key={index}>
                 <Link

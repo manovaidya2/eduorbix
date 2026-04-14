@@ -25,6 +25,10 @@ import ContactAdminDashboard from "./contact/ContactAdminDashboard";
 import ApplicationAdminDashboard from "./application/ApplicationAdminDashboard";
 import AdminAgentDashboard from "./pages/AdminAgentDashboard";
 import AdminPartnerDashboard from "./pages/AdminPartnerDashboard";
+import AdminAddUniversity from "./associates/AdminAddUniversity";
+import AdminAssociateDashboard from "./associates/AdminAssociateDashboard";
+import AdminEditUniversity from "./associates/AdminEditUniversity";
+import AdminViewUniversity from "./associates/AdminViewUniversity";
 
 
 
@@ -59,7 +63,10 @@ function App() {
     <Route path="/admin-applications" element={<Layout><ApplicationAdminDashboard /></Layout>} />
     <Route  path="/agent-dashboard" element={<Layout><AdminAgentDashboard /></Layout>} />
     <Route path="/partner-dashboard" element={<Layout><AdminPartnerDashboard /></Layout>} />
-
+    <Route path="/add-associate" element={<Layout><AdminAddUniversity /></Layout>} />
+      <Route path="/admin-associates-dashboard" element={<Layout><AdminAssociateDashboard /></Layout>} />
+       <Route path="/admin/edit-university/:id" element={<Layout><AdminEditUniversity /></Layout>} />
+         <Route path="/admin/view-university/:id" element={<Layout><AdminViewUniversity /></Layout>} />
 
 
           <Route path="*" element={<Navigate to="/" />} />

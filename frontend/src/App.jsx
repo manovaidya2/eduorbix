@@ -20,6 +20,9 @@
 import ProgramDetails from './studyindia/ProgramDetails.jsx';
 import StudyAbroadDetails from './studyabroad/StudyAbroadDetails.jsx';
 import BlogDetailsPage from './blog/BlogDetailsPage.jsx';
+import AssociatesPage from './services/AssociatesPage.jsx';
+import AspirantsPage from './services/AspirantsPage.jsx';
+import UniversityDetail from './pages/UniversityDetail.jsx';
 
   function App() {
     return (
@@ -43,6 +46,13 @@ import BlogDetailsPage from './blog/BlogDetailsPage.jsx';
             <Route path='/for-agents' element={<Agent />} />
        <Route path="/program/:id" element={<ProgramDetails />} />
        <Route path="/study/:country" element={<StudyAbroadDetails />} />
+       <Route path="/associates" element={<AssociatesPage />} />
+       <Route path="/aspirants" element={<AspirantsPage />} />
+         <Route path="/associates/:id" element={<UniversityDetail />} />
+
+
+
+
        {/* <Route path="" element={<BlogDetailsPage />} /> */}
                  </Routes>
         </Layout>
