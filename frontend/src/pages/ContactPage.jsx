@@ -12,7 +12,8 @@ import {
   Twitter,
   Linkedin,
   Instagram,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
 
@@ -26,33 +27,25 @@ const ContactPage = () => {
   const [formStatus, setFormStatus] = useState({ type: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear status when user types
     if (formStatus.message) setFormStatus({ type: '', message: '' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate form
     if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus({ 
-        type: 'error', 
-        message: 'Please fill in all required fields' 
-      });
+      setFormStatus({ type: 'error', message: 'Please fill in all required fields' });
       return;
     }
 
-    // Email validation
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!emailRegex.test(formData.email)) {
-      setFormStatus({
-        type: 'error',
-        message: 'Please enter a valid email address'
-      });
+      setFormStatus({ type: 'error', message: 'Please enter a valid email address' });
       return;
     }
 
@@ -62,35 +55,27 @@ const ContactPage = () => {
       const response = await axiosInstance.post('/contact', formData);
       
       if (response.data.success) {
-        setFormStatus({ 
-          type: 'success', 
-          message: response.data.message || 'Message sent successfully! We\'ll get back to you soon.' 
-        });
+        setFormStatus({ type: 'success', message: response.data.message || 'Message sent successfully! We\'ll get back to you soon.' });
         setSubmitted(true);
-        
-        // Reset form
         setFormData({ name: '', email: '', phone: '', message: '' });
         
-        // Clear success message after 5 seconds
         setTimeout(() => {
           setSubmitted(false);
           setFormStatus({ type: '', message: '' });
         }, 5000);
       } else {
-        setFormStatus({ 
-          type: 'error', 
-          message: response.data.message || 'Failed to send message. Please try again.' 
-        });
+        setFormStatus({ type: 'error', message: response.data.message || 'Failed to send message. Please try again.' });
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
-      setFormStatus({ 
-        type: 'error', 
-        message: error.response?.data?.message || 'Network error. Please check your connection and try again.' 
-      });
+      setFormStatus({ type: 'error', message: error.response?.data?.message || 'Network error. Please check your connection and try again.' });
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
   };
 
   const contactInfo = [
@@ -129,6 +114,15 @@ const ContactPage = () => {
     { icon: <Instagram size={18} />, href: "https://instagram.com", bg: "bg-pink-600", hover: "hover:bg-pink-700" }
   ];
 
+  const faqs = [
+    { q: "How quickly do you respond?", a: "We typically respond within 2-4 hours during business hours (Monday-Saturday, 9 AM - 7 PM). For urgent queries, please call us directly." },
+    { q: "Do you provide online counseling?", a: "Yes, we offer both online and in-person counseling sessions. Our online sessions are conducted via Zoom, Google Meet, or WhatsApp video calls for your convenience." },
+    { q: "Is there any consultation fee?", a: "Initial consultation is completely free. We'll discuss any applicable fees for ongoing services like application processing, visa assistance, and test preparation before proceeding." },
+    { q: "Which countries do you cover?", a: "We cover major study destinations including USA, UK, Canada, Australia, Germany, France, Ireland, New Zealand, and European countries. We also specialize in UAE and Middle Eastern institutions." },
+    { q: "Do you help with visa applications?", a: "Yes, we provide comprehensive visa guidance and application assistance. Our team helps with documentation, interview preparation, and submission process." },
+    { q: "What documents do I need to apply?", a: "Typically you'll need academic transcripts, passport copy, language test scores (IELTS/TOEFL), statement of purpose, letters of recommendation, and financial documents. Requirements vary by country and university." }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-x-hidden">
       {/* Hero Section */}
@@ -160,7 +154,7 @@ const ContactPage = () => {
         </div>
       </div>
 
-      {/* Contact Info Cards - Now only 2 cards */}
+      {/* Contact Info Cards */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-12 md:-mt-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {contactInfo.map((info, index) => (
@@ -433,45 +427,69 @@ const ContactPage = () => {
         </div>
       </div>
 
-      {/* FAQ Section */}
+      {/* FAQ Section with Dropdown/Accordion */}
       <div className="bg-white py-12 sm:py-16 md:py-20 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Frequently Asked <span className="text-[#c5a46d]">Questions</span>
             </h2>
             <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto px-2">
-              Quick answers to common questions about our services
+              Find answers to common questions about our services
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                q: "How quickly do you respond?",
-                a: "We typically respond within 2-4 hours during business hours."
-              },
-              {
-                q: "Do you provide online counseling?",
-                a: "Yes, we offer both online and in-person counseling sessions."
-              },
-              {
-                q: "Is there any consultation fee?",
-                a: "Initial consultation is free. We'll discuss fees for ongoing services."
-              },
-              {
-                q: "Which countries do you cover?",
-                a: "We cover major study destinations including USA, UK, Canada, Australia, and Europe."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-md transition-all">
-                <h3 className="font-semibold text-gray-900 mb-1.5 sm:mb-2 flex items-center gap-2 text-sm sm:text-base">
-                  <span className="w-1.5 h-1.5 bg-[#c5a46d] rounded-full flex-shrink-0"></span>
-                  {faq.q}
-                </h3>
-                <p className="text-gray-600 text-xs sm:text-sm pl-4 sm:pl-5">{faq.a}</p>
+          <div className="space-y-3 sm:space-y-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-3 text-left hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <span className="font-semibold text-gray-900 text-sm sm:text-base flex-1">
+                    {faq.q}
+                  </span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`text-[#c5a46d] transition-transform duration-300 flex-shrink-0 ${
+                      openFaq === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="px-5 sm:px-6 pb-4 sm:pb-5 pt-0">
+                    <div className="pt-3 border-t border-gray-100">
+                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                        {faq.a}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Contact Support */}
+          <div className="mt-8 sm:mt-10 text-center">
+            <p className="text-gray-600 text-sm">
+              Still have questions?{" "}
+              <button 
+                onClick={() => {
+                  document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-[#c5a46d] font-semibold hover:underline"
+              >
+                Contact our support team
+              </button>
+            </p>
           </div>
         </div>
       </div>
