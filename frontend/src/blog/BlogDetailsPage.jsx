@@ -16,6 +16,7 @@ import {
   Loader
 } from 'lucide-react';
 import axiosInstance from '../api/axiosInstance';
+import { Helmet } from "react-helmet-async";
 
 const BlogDetailsPage = () => {
   const { slug } = useParams();
@@ -161,6 +162,102 @@ const BlogDetailsPage = () => {
   }
 
   return (
+    <>
+  <Helmet>
+
+    <title>
+      {blog.title} | EduOrbix Blog
+    </title>
+
+    <meta
+      name="description"
+      content={
+        blog.shortDescription ||
+        blog.metaDescription ||
+        "Read the latest education blog on EduOrbix."
+      }
+    />
+
+    <meta
+      name="keywords"
+      content={`${blog.title}, study abroad, scholarships, admissions, EduOrbix`}
+    />
+
+    <meta
+      name="author"
+      content={blog.authorName || "EduOrbix"}
+    />
+
+    <meta
+      name="robots"
+      content="index, follow"
+    />
+
+    <link
+      rel="canonical"
+      href={`https://eduorbix.com/blog/${blog.slug}`}
+    />
+
+    {/* Open Graph */}
+    <meta
+      property="og:title"
+      content={blog.title}
+    />
+
+    <meta
+      property="og:description"
+      content={
+        blog.shortDescription ||
+        "Read the latest educational insights on EduOrbix."
+      }
+    />
+
+    <meta
+      property="og:url"
+      content={`https://eduorbix.com/blog/${blog.slug}`}
+    />
+
+    <meta
+      property="og:type"
+      content="article"
+    />
+
+    <meta
+      property="og:image"
+      content={
+        blog.image ||
+        "https://eduorbix.com/favicon.png"
+      }
+    />
+
+    {/* Twitter */}
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content={blog.title}
+    />
+
+    <meta
+      name="twitter:description"
+      content={
+        blog.shortDescription ||
+        "Read the latest educational insights on EduOrbix."
+      }
+    />
+
+    <meta
+      name="twitter:image"
+      content={
+        blog.image ||
+        "https://eduorbix.com/favicon.png"
+      }
+    />
+
+  </Helmet>
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Hero Image - Improved Fitting */}
       <div className="relative w-full bg-gradient-to-r from-gray-900 to-gray-800">
@@ -583,6 +680,7 @@ const BlogDetailsPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
