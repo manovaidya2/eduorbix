@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-<section className="relative w-full min-h-[115vh] md:min-h-[90vh] flex items-center justify-center md:justify-start pb-10 -mt-[80px] md:mt-0">      {/* Background */}
+    <section className="relative w-full min-h-[115vh] md:min-h-[90vh] flex items-center justify-center md:justify-start pb-10 -mt-[80px] md:mt-0">
+      
+      {/* Background */}
       <div className="absolute inset-0">
         <img
           src={img}
           alt="hero"
           className="w-full h-full object-cover object-center md:object-cover"
           style={{
-            // Mobile: ensure image covers the container fully
             objectFit: "cover",
             objectPosition: "center",
           }}
@@ -21,6 +22,16 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl px-4 md:px-10 lg:px-16 text-white text-center md:text-left flex flex-col items-center md:items-start justify-center">
+        
+        {/* Powered By */}
+       {/* Powered By */}
+<div className="mb-4 flex items-center gap-2 text-sm md:text-lg">
+  <span className="text-gray-300">Powered by</span>
+  <span className="text-[#c5a46d] font-semibold">
+    EduGlobe Services FZ-LLC
+  </span>
+</div>
+
         {/* Badge */}
         <div className="inline-block bg-[#0d2f52] border border-yellow-400 text-[#c5a46d] px-3 py-1 rounded-full text-sm mb-5">
           • Trusted by 15,000+ Students
@@ -58,9 +69,11 @@ export default function Hero() {
           <div className="flex items-center gap-2">
             <span className="text-[#c5a46d]">✔</span> 98% Success Rate
           </div>
+
           <div className="flex items-center gap-2">
             <span className="text-[#c5a46d]">✔</span> 500+ Universities
           </div>
+
           <div className="flex items-center gap-2">
             <span className="text-[#c5a46d]">✔</span> 25+ Countries
           </div>
@@ -69,24 +82,41 @@ export default function Hero() {
 
       {/* Bottom Stats Card */}
       <div className="absolute bottom-[-10px] md:bottom-[-50px] left-1/2 -translate-x-1/2 w-[95%] md:w-[92%] bg-white rounded-2xl shadow-lg grid grid-cols-2 md:grid-cols-4 text-center py-6">
+        
         <div className="border-r border-gray-200">
-          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">15,000+</p>
-          <p className="text-gray-600 text-xs md:text-sm">Students Placed</p>
+          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">
+            15,000+
+          </p>
+          <p className="text-gray-600 text-xs md:text-sm">
+            Students Placed
+          </p>
         </div>
 
         <div className="border-r border-gray-200">
-          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">500+</p>
-          <p className="text-gray-600 text-xs md:text-sm">Partner Universities</p>
+          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">
+            500+
+          </p>
+          <p className="text-gray-600 text-xs md:text-sm">
+            Partner Universities
+          </p>
         </div>
 
         <div className="border-r border-gray-200">
-          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">25+</p>
-          <p className="text-gray-600 text-xs md:text-sm">Countries Covered</p>
+          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">
+            25+
+          </p>
+          <p className="text-gray-600 text-xs md:text-sm">
+            Countries Covered
+          </p>
         </div>
 
         <div>
-          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">98%</p>
-          <p className="text-gray-600 text-xs md:text-sm">Success Rate</p>
+          <p className="text-xl md:text-2xl font-bold text-[#c5a46d]">
+            98%
+          </p>
+          <p className="text-gray-600 text-xs md:text-sm">
+            Success Rate
+          </p>
         </div>
       </div>
     </section>
