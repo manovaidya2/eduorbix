@@ -122,7 +122,7 @@ export default function UniversityDetail() {
 
         {/* TITLE */}
         <title>
-          {university.name} | Partner University | EduGlobe
+          {university.name} | Partner University | Eduorbix
         </title>
 
         {/* DESCRIPTION */}
