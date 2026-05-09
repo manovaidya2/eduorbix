@@ -51,7 +51,7 @@ import ResearchAssociate from './pages/ResearchAssociate.jsx';
        <Route path="/study/:country" element={<StudyAbroadDetails />} />
        <Route path="/associates" element={<AssociatesPage />} />
        <Route path="/aspirants" element={<AspirantsPage />} />
-         <Route path="/associates/:id" element={<UniversityDetail />} />
+      <Route path="/associates/:name" element={<UniversityDetail />} />
          <Route path="/admission-consultant" element={<AdmissionConsultant />} />
 <Route path="/industrial-training-partner" element={<IndustrialTrainingPartner />} />
 <Route path="/research-associate" element={<ResearchAssociate />} />
