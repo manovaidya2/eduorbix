@@ -44,38 +44,38 @@ export default function AdmissionConsultant() {
       color: "from-purple-500 to-purple-600",
       description: "Official affiliation documentation"
     },
-    {
-      id: 4,
-      name: "Information Brochure",
-      file: "/admission%20cunsltant/Information_Brochure_-compressed.pdf-1775216845626.pdf",
-      icon: <BookOpen size={24} />,
-      color: "from-orange-500 to-orange-600",
-      description: "Complete university information guide"
-    },
-    {
-      id: 5,
-      name: "NECU Application Form",
-      file: "/admission%20cunsltant/NECU%20Application%20form%20(2).pdf",
-      icon: <FileText size={24} />,
-      color: "from-red-500 to-red-600",
-      description: "Official application form for admission"
-    },
-    {
-      id: 6,
-      name: "NECU Fee Details",
-      file: "/admission%20cunsltant/NECU%20FEE%20ALL.pdf",
-      icon: <Banknote size={24} />,
-      color: "from-emerald-500 to-emerald-600",
-      description: "Complete fee structure and payment information"
-    },
-    {
-      id: 7,
-      name: "NECU Degree Form",
-      file: "/admission%20cunsltant/NECU%20Degree%20Form.pdf",
-      icon: <GraduationCap size={24} />,
-      color: "from-indigo-500 to-indigo-600",
-      description: "Degree application and registration form"
-    },
+    // {
+    //   id: 4,
+    //   name: "Information Brochure",
+    //   file: "/admission%20cunsltant/Information_Brochure_-compressed.pdf-1775216845626.pdf",
+    //   icon: <BookOpen size={24} />,
+    //   color: "from-orange-500 to-orange-600",
+    //   description: "Complete university information guide"
+    // },
+    // {
+    //   id: 5,
+    //   name: "NECU Application Form",
+    //   file: "/admission%20cunsltant/NECU%20Application%20form%20(2).pdf",
+    //   icon: <FileText size={24} />,
+    //   color: "from-red-500 to-red-600",
+    //   description: "Official application form for admission"
+    // },
+    // {
+    //   id: 6,
+    //   name: "NECU Fee Details",
+    //   file: "/admission%20cunsltant/NECU%20FEE%20ALL.pdf",
+    //   icon: <Banknote size={24} />,
+    //   color: "from-emerald-500 to-emerald-600",
+    //   description: "Complete fee structure and payment information"
+    // },
+    // {
+    //   id: 7,
+    //   name: "NECU Degree Form",
+    //   file: "/admission%20cunsltant/NECU%20Degree%20Form.pdf",
+    //   icon: <GraduationCap size={24} />,
+    //   color: "from-indigo-500 to-indigo-600",
+    //   description: "Degree application and registration form"
+    // },
     {
       id: 8,
       name: "Bank Account Details",
@@ -84,14 +84,14 @@ export default function AdmissionConsultant() {
       color: "from-cyan-500 to-cyan-600",
       description: "Bank account information for fee payment"
     },
-    {
-      id: 9,
-      name: "Admission Consultants",
-      file: "/admission%20cunsltant/Admission%20consultants%20(1).pdf",
-      icon: <Users size={24} />,
-      color: "from-rose-500 to-rose-600",
-      description: "List of authorized admission consultants"
-    },
+    // {
+    //   id: 9,
+    //   name: "Admission Consultants",
+    //   file: "/admission%20cunsltant/Admission%20consultants%20(1).pdf",
+    //   icon: <Users size={24} />,
+    //   color: "from-rose-500 to-rose-600",
+    //   description: "List of authorized admission consultants"
+    // },
     {
       id: 10,
       name: "Admission Process",
@@ -127,7 +127,7 @@ export default function AdmissionConsultant() {
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-10">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-5">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 bg-yellow-500/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-yellow-500/30">
               <Award size={18} className="text-yellow-400" />
@@ -135,7 +135,7 @@ export default function AdmissionConsultant() {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
-              North East Christian University
+             Admission Consultant
             </h1>
             
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
@@ -169,7 +169,7 @@ export default function AdmissionConsultant() {
       </section>
 
       {/* Quick Stats Section */}
-      <section className="px-4 -mt-16 relative z-10">
+      <section className="px-4 -mt-12 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-white rounded-2xl shadow-xl p-6 text-center transform hover:scale-105 transition-all duration-300">
@@ -381,7 +381,7 @@ export default function AdmissionConsultant() {
       </section>
 
       {/* CTA Footer */}
-      <section className="py-16 px-4 bg-gradient-to-r from-[#0a2a48] to-[#0d2f52]">
+      {/* <section className="py-16 px-4 bg-gradient-to-r from-[#0a2a48] to-[#0d2f52]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Start Your Journey?
@@ -407,7 +407,7 @@ export default function AdmissionConsultant() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

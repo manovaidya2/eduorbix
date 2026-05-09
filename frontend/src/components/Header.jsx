@@ -44,8 +44,8 @@ export default function Header() {
   // Admission Partner submenu items
   const admissionPartnerItems = [
     { path: "/admission-consultant", label: "Admission Consultant", icon: <Users size={18} />, description: "Expert guidance for admissions" },
-    { path: "/industrial-training-partner", label: "Industrial Training Partner", icon: <Briefcase size={18} />, description: "Industry ready training programs" },
-    { path: "/research-associate", label: "Research Associate", icon: <FlaskConical size={18} />, description: "Research collaboration opportunities" }
+    // { path: "/industrial-training-partner", label: "Industrial Training Partner", icon: <Briefcase size={18} />, description: "Industry ready training programs" },
+    // { path: "/research-associate", label: "Research Associate", icon: <FlaskConical size={18} />, description: "Research collaboration opportunities" }
   ];
 
   // Fetch Study in India programs
