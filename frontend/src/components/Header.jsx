@@ -1,6 +1,6 @@
-// Header.jsx (updated with individual category dropdowns for mobile)
+// Header.jsx (updated with Admission Partner dropdown)
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, ChevronRight, GraduationCap, Globe, BookOpen, Building, Settings, Heart, Phone, MapPin, Clock, User, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, GraduationCap, Globe, BookOpen, Building, Settings, Heart, Phone, MapPin, Clock, User, LogOut, Handshake, Briefcase, Users, FlaskConical } from "lucide-react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import logo from "../images/White logo (1).png";
@@ -17,6 +17,8 @@ export default function Header() {
   const [isMobileStudyAbroadOpen, setIsMobileStudyAbroadOpen] = useState(false);
   const [isProgramsHorizonOpen, setIsProgramsHorizonOpen] = useState(false);
   const [isMobileProgramsOpen, setIsMobileProgramsOpen] = useState(false);
+  const [isAdmissionPartnerOpen, setIsAdmissionPartnerOpen] = useState(false);
+  const [isMobileAdmissionPartnerOpen, setIsMobileAdmissionPartnerOpen] = useState(false);
   
   // State for individual category dropdowns in mobile
   const [mobileOpenCategories, setMobileOpenCategories] = useState({});
@@ -24,9 +26,11 @@ export default function Header() {
   let studyIndiaTimeoutRef = useRef(null);
   let studyAbroadTimeoutRef = useRef(null);
   let programsHorizonTimeoutRef = useRef(null);
+  let admissionPartnerTimeoutRef = useRef(null);
   const dropdownRef = useRef(null);
   const studyAbroadDropdownRef = useRef(null);
   const programsHorizonRef = useRef(null);
+  const admissionPartnerRef = useRef(null);
 
   // Program headings data
   const programHeadings = [
@@ -37,30 +41,37 @@ export default function Header() {
     "BOARD EDUCATION"
   ];
 
+  // Admission Partner submenu items
+  const admissionPartnerItems = [
+    { path: "/admission-consultant", label: "Admission Consultant", icon: <Users size={18} />, description: "Expert guidance for admissions" },
+    { path: "/industrial-training-partner", label: "Industrial Training Partner", icon: <Briefcase size={18} />, description: "Industry ready training programs" },
+    { path: "/research-associate", label: "Research Associate", icon: <FlaskConical size={18} />, description: "Research collaboration opportunities" }
+  ];
+
   // Fetch Study in India programs
   useEffect(() => {
     fetchStudyIndiaPrograms();
     fetchStudyAbroadCountries();
   }, []);
 
-const fetchStudyIndiaPrograms = async () => {
-  try {
-    const response = await axiosInstance.get("/study-india-programs");
-    if (response.data.success) {
-      const programs = response.data.data;
-      setStudyIndiaPrograms(programs);
-      
-      // Categorize programs
-      const categorized = {};
-      programHeadings.forEach(heading => {
-        categorized[heading] = programs.filter(program => program.category === heading);
-      });
-      setCategorizedPrograms(categorized);
+  const fetchStudyIndiaPrograms = async () => {
+    try {
+      const response = await axiosInstance.get("/study-india-programs");
+      if (response.data.success) {
+        const programs = response.data.data;
+        setStudyIndiaPrograms(programs);
+        
+        // Categorize programs
+        const categorized = {};
+        programHeadings.forEach(heading => {
+          categorized[heading] = programs.filter(program => program.category === heading);
+        });
+        setCategorizedPrograms(categorized);
+      }
+    } catch (error) {
+      console.error("Error fetching study india programs:", error);
     }
-  } catch (error) {
-    console.error("Error fetching study india programs:", error);
-  }
-};
+  };
 
   const fetchStudyAbroadCountries = async () => {
     try {
@@ -131,7 +142,7 @@ const fetchStudyIndiaPrograms = async () => {
     }, 200);
   };
 
-  // Hover handlers for Programs Horizon - Now shows categorized dropdown
+  // Hover handlers for Programs Horizon
   const handleProgramsHorizonMouseEnter = () => {
     if (programsHorizonTimeoutRef.current) {
       clearTimeout(programsHorizonTimeoutRef.current);
@@ -142,6 +153,20 @@ const fetchStudyIndiaPrograms = async () => {
   const handleProgramsHorizonMouseLeave = () => {
     programsHorizonTimeoutRef.current = setTimeout(() => {
       setIsProgramsHorizonOpen(false);
+    }, 200);
+  };
+
+  // Hover handlers for Admission Partner
+  const handleAdmissionPartnerMouseEnter = () => {
+    if (admissionPartnerTimeoutRef.current) {
+      clearTimeout(admissionPartnerTimeoutRef.current);
+    }
+    setIsAdmissionPartnerOpen(true);
+  };
+
+  const handleAdmissionPartnerMouseLeave = () => {
+    admissionPartnerTimeoutRef.current = setTimeout(() => {
+      setIsAdmissionPartnerOpen(false);
     }, 200);
   };
 
@@ -156,6 +181,9 @@ const fetchStudyIndiaPrograms = async () => {
       }
       if (programsHorizonTimeoutRef.current) {
         clearTimeout(programsHorizonTimeoutRef.current);
+      }
+      if (admissionPartnerTimeoutRef.current) {
+        clearTimeout(admissionPartnerTimeoutRef.current);
       }
     };
   }, []);
@@ -190,21 +218,21 @@ const fetchStudyIndiaPrograms = async () => {
         <div className={`text-white px-4 md:px-8 py-4 flex items-center justify-between transition-all duration-300 ${
           scrolled ? "bg-[#0b2a4a]" : "bg-[#0b2a4a]"
         }`}>
-          {/* Logo - Size Increased */}
+          {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
               src={logo} 
               alt="Eduorbix Logo" 
-              className="h-12 md:h-16 lg:h-15 object-contain" // Increased from h-10 md:h-15 to h-12 md:h-16 lg:h-20
+              className="h-12 md:h-16 lg:h-15 object-contain"
             />
           </Link>
           
-          {/* Desktop Menu - NO CHANGES */}
-          <nav className="hidden md:flex items-center gap-4 text-[16px] font-medium">
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex items-center gap-3 text-[16px] font-medium">
             <Link to="/" className="hover:text-yellow-400">Home</Link>
             <Link to="/about-us" className="hover:text-yellow-400">About Us</Link>
 
-            {/* PROGRAMS HORIZON - Categorized dropdown with programs */}
+            {/* PROGRAMS HORIZON */}
             <div 
               className="relative" 
               ref={programsHorizonRef}
@@ -234,7 +262,6 @@ const fetchStudyIndiaPrograms = async () => {
                               </Link>
                               {programsInCategory.length > 0 ? (
                                 <ul className="space-y-2">
-                                  {/* Display ALL programs - removed the slice limit */}
                                   {programsInCategory.map((program) => (
                                     <li key={program._id}>
                                       <Link
@@ -283,6 +310,43 @@ const fetchStudyIndiaPrograms = async () => {
               )}
             </div>
 
+            {/* ADMISSION PARTNER Dropdown - NEW */}
+            <div 
+              className="relative" 
+              ref={admissionPartnerRef}
+              onMouseEnter={handleAdmissionPartnerMouseEnter}
+              onMouseLeave={handleAdmissionPartnerMouseLeave}
+            >
+              <button className="flex items-center gap-1 hover:text-yellow-400 focus:outline-none cursor-pointer">
+                Admission Partner <ChevronDown size={16} />
+              </button>
+              {isAdmissionPartnerOpen && (
+                <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-lg py-2 z-50 animate-slideDown">
+                  {admissionPartnerItems.map((item, index) => (
+                    <Link 
+                      key={index}
+                      to={item.path} 
+                      onClick={() => setIsAdmissionPartnerOpen(false)} 
+                      className="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors group border-b border-gray-100 last:border-0"
+                    >
+                      <div className="text-yellow-600 mt-0.5 group-hover:scale-110 transition-transform">
+                        {item.icon}
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-800 group-hover:text-yellow-600 transition-colors">
+                          {item.label}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-0.5">
+                          {item.description}
+                        </div>
+                      </div>
+                      <ChevronRight size={16} className="text-gray-400 opacity-0 group-hover:opacity-100 transition-all" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Link to="/services" className="hover:text-yellow-400">Services</Link>
             <Link to="/associates" className="hover:text-yellow-400">Associate</Link>
             <Link to="/scholarships" className="hover:text-yellow-400">Scholarships</Link>
@@ -304,7 +368,7 @@ const fetchStudyIndiaPrograms = async () => {
         </div>
       </header>
 
-      {/* Mobile Sidebar - UPDATED with individual category dropdowns */}
+      {/* Mobile Sidebar */}
       {isOpen && (
         <div className="fixed inset-0 z-50 md:hidden" onClick={() => setIsOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-300" onClick={() => setIsOpen(false)} />
@@ -334,7 +398,7 @@ const fetchStudyIndiaPrograms = async () => {
               ))}
             </div>
 
-            {/* Mobile Programs Section - UPDATED with individual dropdowns for each category */}
+            {/* Mobile Programs Section */}
             <div className="px-5 mt-2">
               <button 
                 onClick={() => setIsMobileProgramsOpen(!isMobileProgramsOpen)} 
@@ -353,7 +417,6 @@ const fetchStudyIndiaPrograms = async () => {
                     const programsInCategory = categorizedPrograms[heading] || [];
                     return (
                       <div key={idx} className="space-y-1">
-                        {/* Category Header with its own dropdown toggle */}
                         <button
                           onClick={() => toggleMobileCategory(heading)}
                           className="flex items-center justify-between w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 transition-colors group"
@@ -371,12 +434,10 @@ const fetchStudyIndiaPrograms = async () => {
                           />
                         </button>
                         
-                        {/* Programs list for this category (visible when dropdown is open) - Display ALL programs */}
                         {mobileOpenCategories[heading] && (
                           <div className="pl-4 space-y-1 pb-2 overflow-hidden animate-slideDown">
                             {programsInCategory.length > 0 ? (
                               <>
-                                {/* Display ALL programs - removed the slice limit */}
                                 {programsInCategory.map((program) => (
                                   <Link 
                                     key={program._id}
@@ -397,7 +458,6 @@ const fetchStudyIndiaPrograms = async () => {
                     );
                   })}
                   
-                  {/* View All Programs Link */}
                   <Link 
                     to="/study-in-india" 
                     onClick={() => setIsOpen(false)} 
@@ -405,6 +465,46 @@ const fetchStudyIndiaPrograms = async () => {
                   >
                     📚 View All Programs
                   </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Admission Partner Section - NEW */}
+            <div className="px-5 mt-3">
+              <button 
+                onClick={() => setIsMobileAdmissionPartnerOpen(!isMobileAdmissionPartnerOpen)} 
+                className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-white bg-white/5 hover:bg-white/10 transition-all duration-200 group"
+              >
+                <div className="flex items-center gap-3">
+                  <Handshake size={20} className="text-yellow-400" />
+                  <span className="font-medium">Admission Partner</span>
+                </div>
+                <ChevronDown size={18} className={`text-yellow-400 transition-transform duration-300 ${isMobileAdmissionPartnerOpen ? "rotate-180" : ""}`} />
+              </button>
+              
+              {isMobileAdmissionPartnerOpen && (
+                <div className="mt-3 ml-8 space-y-3 pl-4 overflow-hidden animate-slideDown">
+                  {admissionPartnerItems.map((item, index) => (
+                    <Link 
+                      key={index}
+                      to={item.path} 
+                      onClick={() => { setIsOpen(false); setIsMobileAdmissionPartnerOpen(false); }} 
+                      className="flex items-center gap-3 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all group"
+                    >
+                      <div className="text-yellow-400">
+                        {item.icon}
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-white font-medium text-sm">
+                          {item.label}
+                        </div>
+                        <div className="text-white/50 text-xs mt-0.5">
+                          {item.description}
+                        </div>
+                      </div>
+                      <ChevronRight size={16} className="text-yellow-400 opacity-0 group-hover:opacity-100 transition-all" />
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -424,7 +524,6 @@ const fetchStudyIndiaPrograms = async () => {
                     📚 View All Programs
                   </Link>
                   {studyIndiaPrograms.length > 0 ? (
-                    // Display ALL study india programs - removed the slice limit
                     studyIndiaPrograms.map((program) => (
                       <Link key={program._id} to={`/program/${program._id}`} onClick={() => { setIsOpen(false); setIsMobileStudyIndiaOpen(false); }} className="block text-sm bg-white/10 rounded-lg text-white/70 hover:text-yellow-400 py-2 transition-colors px-3">
                         {program.title.length > 35 ? program.title.slice(0, 35) + "..." : program.title}
@@ -449,7 +548,6 @@ const fetchStudyIndiaPrograms = async () => {
               {isMobileStudyAbroadOpen && (
                 <div className="mt-3 ml-8 space-y-2 pl-4 overflow-hidden animate-slideDown">
                   {studyAbroadCountries.length > 0 ? (
-                    // Display ALL study abroad countries - removed the slice limit
                     studyAbroadCountries.map((country) => (
                       <Link key={country._id} to={`/study/${country.country.toLowerCase()}`} onClick={() => { setIsOpen(false); setIsMobileStudyAbroadOpen(false); }} className="flex items-center gap-2 text-sm bg-white/10 rounded-lg mb-2 text-white/70 hover:text-yellow-400 px-3 py-2 transition-colors">
                         <span className="text-base">{country.flag || "🌍"}</span>

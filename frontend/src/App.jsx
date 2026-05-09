@@ -23,6 +23,9 @@ import BlogDetailsPage from './blog/BlogDetailsPage.jsx';
 import AssociatesPage from './services/AssociatesPage.jsx';
 import AspirantsPage from './services/AspirantsPage.jsx';
 import UniversityDetail from './pages/UniversityDetail.jsx';
+import AdmissionConsultant from './pages/AdmissionConsultant.jsx';
+import IndustrialTrainingPartner from './pages/IndustrialTrainingPartner.jsx';
+import ResearchAssociate from './pages/ResearchAssociate.jsx';
 
   function App() {
     return (
@@ -49,6 +52,9 @@ import UniversityDetail from './pages/UniversityDetail.jsx';
        <Route path="/associates" element={<AssociatesPage />} />
        <Route path="/aspirants" element={<AspirantsPage />} />
          <Route path="/associates/:id" element={<UniversityDetail />} />
+         <Route path="/admission-consultant" element={<AdmissionConsultant />} />
+<Route path="/industrial-training-partner" element={<IndustrialTrainingPartner />} />
+<Route path="/research-associate" element={<ResearchAssociate />} />
 
 
 
