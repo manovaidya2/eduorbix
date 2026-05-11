@@ -474,7 +474,6 @@
 
 
 
-
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
@@ -536,13 +535,26 @@ export default function AssociatesPage() {
       const data = await response.json();
       console.log("Fetched universities:", data);
 
+      // Sort universities by displayOrder first (lower number first), then by createdAt
       const sortedUniversities = (data.data || []).sort((a, b) => {
+        // First priority: displayOrder (lower number appears first)
+        const orderA = a.displayOrder !== undefined && a.displayOrder !== null ? a.displayOrder : 999999;
+        const orderB = b.displayOrder !== undefined && b.displayOrder !== null ? b.displayOrder : 999999;
+        
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+        
+        // Second priority: createdAt (older first for same displayOrder)
         if (a.createdAt && b.createdAt) {
           return new Date(a.createdAt) - new Date(b.createdAt);
         }
+        
+        // Fallback: if no createdAt, try using _id (MongoDB ObjectId contains timestamp)
         if (a._id && b._id) {
           return a._id.localeCompare(b._id);
         }
+        
         return 0;
       });
 
@@ -731,7 +743,7 @@ export default function AssociatesPage() {
             )}
           </div>
 
-          {/* UNIVERSITY CARDS */}
+          {/* UNIVERSITY CARDS - Displayed in Display Order */}
           {filteredUniversities.length === 0 ? (
             <div className="text-center py-12 bg-white rounded-xl shadow-md">
               <div className="text-6xl mb-4">🔍</div>
@@ -781,6 +793,15 @@ export default function AssociatesPage() {
                         </span>
                       </div>
                     </div>
+
+                    {/* Display Order Badge (Optional - for admin visibility, remove if not needed) */}
+                    {uni.displayOrder !== undefined && uni.displayOrder !== null && uni.displayOrder !== 0 && (
+                      <div className="mt-2 text-right">
+                        <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded">
+                          Priority: {uni.displayOrder}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Documents Count Badge */}
                     {uni.documents && uni.documents.length > 0 ? (
