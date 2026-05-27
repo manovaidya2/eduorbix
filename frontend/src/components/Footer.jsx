@@ -180,7 +180,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-[#254a7a] mt-10 pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-          <p>© 2026 Eduorbix. All rights reserved.</p>
+          <p>© 2025 Eduglobe Services FZ LLC. All rights reserved.</p>
 
           <div className="flex gap-6 mt-2 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-yellow-400 transition cursor-pointer">Privacy Policy</Link>

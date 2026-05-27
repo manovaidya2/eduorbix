@@ -26,6 +26,9 @@ import UniversityDetail from './pages/UniversityDetail.jsx';
 import AdmissionConsultant from './pages/AdmissionConsultant.jsx';
 import IndustrialTrainingPartner from './pages/IndustrialTrainingPartner.jsx';
 import ResearchAssociate from './pages/ResearchAssociate.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import TermsConditions from './pages/TermsConditions.jsx';
+import RefundPolicy from './pages/RefundPolicy.jsx';
 
   function App() {
     return (
@@ -47,14 +50,17 @@ import ResearchAssociate from './pages/ResearchAssociate.jsx';
             <Route path="/blog/:slug" element={<BlogDetailsPage />} />
             <Route path='/partner' element={<PartnerSection />} />
             <Route path='/for-agents' element={<Agent />} />
-       <Route path="/program/:id" element={<ProgramDetails />} />
-       <Route path="/study/:country" element={<StudyAbroadDetails />} />
-       <Route path="/associates" element={<AssociatesPage />} />
-       <Route path="/aspirants" element={<AspirantsPage />} />
-      <Route path="/associates/:name" element={<UniversityDetail />} />
-         <Route path="/admission-consultant" element={<AdmissionConsultant />} />
-<Route path="/industrial-training-partner" element={<IndustrialTrainingPartner />} />
-<Route path="/research-associate" element={<ResearchAssociate />} />
+            <Route path="/program/:id" element={<ProgramDetails />} />
+            <Route path="/study/:country" element={<StudyAbroadDetails />} />
+            <Route path="/associates" element={<AssociatesPage />} />
+            <Route path="/aspirants" element={<AspirantsPage />} />
+            <Route path="/associates/:name" element={<UniversityDetail />} />
+            <Route path="/admission-consultant" element={<AdmissionConsultant />} />
+            <Route path="/industrial-training-partner" element={<IndustrialTrainingPartner />} />
+            <Route path="/research-associate" element={<ResearchAssociate />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/Terms-Conditions" element={<TermsConditions />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
 
 
 
