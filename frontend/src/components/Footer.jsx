@@ -89,12 +89,12 @@ export default function Footer() {
                   <MapPin size={16} className="text-yellow-400 mt-1" />
                   <div>
                     <p className="font-semibold text-white">Head Office:</p>
-                    <p>EduGlobe Services FZ-LLC, Ras Al Khaimah (RAK), UAE</p>
+                    <p> Ras Al Khaimah (RAK), UAE</p>
                   </div>
                 </div>
 
                 {/* Coordinating Office */}
-                <div className="flex items-start gap-2">
+                {/* <div className="flex items-start gap-2">
                   <MapPin size={16} className="text-yellow-400 mt-1" />
                   <div>
                     <p className="font-semibold text-white">Coordinating Office:</p>
@@ -103,7 +103,7 @@ export default function Footer() {
                       (Near Al Qiyadah Metro Station)
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
